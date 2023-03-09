@@ -24,6 +24,10 @@
 
         public double MonthlySalary { get; set; }
 
-        public virtual ICollection<Assignment> Assignments { get; set; }
+        public ICollection<Assignment> Assignments { get; set; }
+
+        public string AddedByUserId { get; set; }
+
+        public ApplicationUser AddedByUser { get; set; }
     }
 }

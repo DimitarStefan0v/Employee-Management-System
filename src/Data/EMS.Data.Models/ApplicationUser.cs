@@ -36,8 +36,9 @@ namespace EMS.Data.Models
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
-        public virtual ICollection<Employee> Employees { get; set; }
+        // Relations with other entities
+        public ICollection<Employee> Employees { get; set; }
 
-        public virtual ICollection<Assignment> Assignments { get; set; }
+        public ICollection<Assignment> Assignments { get; set; }
     }
 }
