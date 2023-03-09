@@ -19,7 +19,7 @@
             this.employeesRepository = employeesRepository;
         }
 
-        public async Task CreateAsync(CreateEmployeeInputModel input)
+        public async Task CreateAsync(CreateEmployeeInputModel input, string userId)
         {
             var employee = new Employee
             {
@@ -29,6 +29,7 @@
                 PhoneNumber = input.PhoneNumber,
                 DateOfBirth = input.DateOfBirth,
                 MonthlySalary = input.MonthlySalary,
+                AddedByUserId = userId == null ? "Guest User" : userId,
             };
 
             await this.employeesRepository.AddAsync(employee);

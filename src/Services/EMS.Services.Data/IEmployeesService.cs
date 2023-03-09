@@ -6,6 +6,6 @@
 
     public interface IEmployeesService
     {
-        Task CreateAsync(CreateEmployeeInputModel input);
+        Task CreateAsync(CreateEmployeeInputModel input, string userId);
     }
 }
