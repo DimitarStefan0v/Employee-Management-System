@@ -1,0 +1,22 @@
+﻿@using EMS.Web.ViewModels.Employees;
+@model EmployeesListViewModel
+
+@{
+    this.ViewData["Title"] = "All employees";
+}
+
+<section class="employees-wrapper">
+    @foreach (var employee in Model.Employees)
+    {
+        <article class="single-employee-wrapper">
+            <ul>
+                <li><p class="single-employee-wrapper-fullname">Full Name: @(employee.FirstName + " " + employee.LastName)</p></li>
+                <li><p class="single-employee-wrapper-email">Email: @employee.Email</p></li>
+                <li><p class="single-employee-wrapper-phone">Phone Number: @employee.PhoneNumber</p></li>
+                <li><p class="single-employee-wrapper-birthday">Date Of Birth: @employee.DateOfBirth</p></li>
+                <li><p class="single-employee-wrapper-salary">Monthly Salary: @(Math.Round(employee.MonthlySalary, 2))</p></li>
+                <li><p class="single-employee-wrapper-addedBy">Added to the System by: @(employee.AddedByUserUserName == null ? "Guest User" : employee.AddedByUserUserName)</p></li>
+            </ul>
+        </article>
+    }
+</section>

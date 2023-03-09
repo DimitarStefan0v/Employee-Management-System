@@ -53,7 +53,9 @@
 
         public IActionResult All()
         {
-            return this.View();
+            var viewModel = new EmployeesListViewModel();
+            viewModel.Employees = this.employeesService.GetAll<EmployeeInListViewModel>();
+            return this.View(viewModel);
         }
     }
 }

@@ -30,7 +30,7 @@
                 PhoneNumber = input.PhoneNumber,
                 DateOfBirth = input.DateOfBirth,
                 MonthlySalary = input.MonthlySalary,
-                AddedByUserId = userId == null ? "Guest User" : userId,
+                AddedByUserId = userId == null ? null : userId,
             };
 
             await this.employeesRepository.AddAsync(employee);
