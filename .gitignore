@@ -398,3 +398,4 @@ FodyWeavers.xsd
 .sln.iml
 /src/Web/EMS.Web/appsettings.json
 /src/Web/EMS.Web/appsettings.Development.json
+/src/Web/EMS.Web/wwwroot/lib
