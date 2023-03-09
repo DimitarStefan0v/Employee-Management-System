@@ -102,6 +102,7 @@
         {
             var viewModel = new EmployeesListViewModel();
             viewModel.Employees = this.employeesService.GetByName<EmployeeInListViewModel>(search);
+            this.ViewData["name"] = search;
             return this.View(viewModel);
         }
     }

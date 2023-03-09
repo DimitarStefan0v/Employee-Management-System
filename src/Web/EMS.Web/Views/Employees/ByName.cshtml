@@ -2,7 +2,7 @@
 @model EmployeesListViewModel
 
 @{
-    this.ViewData["Title"] = "All employees";
+    this.ViewData["Title"] = $"All employees with names containing {this.ViewData["name"]}";
 }
 
 <partial name="_EmployeesListPartial" model="@Model" />
