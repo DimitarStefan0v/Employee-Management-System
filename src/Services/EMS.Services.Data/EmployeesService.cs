@@ -45,7 +45,7 @@
                 .ToList();
         }
 
-        public IEnumerable<T> GetById<T>(int id)
+        public T GetById<T>(int id)
         {
             return this.employeesRepository
                 .AllAsNoTracking()

@@ -11,6 +11,6 @@
 
         IEnumerable<T> GetAll<T>();
 
-        IEnumerable<T> GetById<T>(int id);
+        T GetById<T>(int id);
     }
 }
