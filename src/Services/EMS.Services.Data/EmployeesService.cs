@@ -8,6 +8,7 @@
 
     using EMS.Data.Common.Repositories;
     using EMS.Data.Models;
+    using EMS.Services.Mapping;
     using EMS.Web.ViewModels.Employees;
 
     public class EmployeesService : IEmployeesService
@@ -34,6 +35,14 @@
 
             await this.employeesRepository.AddAsync(employee);
             await this.employeesRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> GetAll<T>()
+        {
+            return this.employeesRepository
+                .AllAsNoTracking()
+                .To<T>()
+                .ToList();
         }
     }
 }
