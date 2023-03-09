@@ -3,6 +3,8 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
+    using EMS.Common.ValidationAttributes;
+
     public class CreateEmployeeInputModel
     {
         [Display(Name = "First Name")]
@@ -17,8 +19,8 @@
         [MaxLength(50, ErrorMessage = "The Last Name can't be more than 50 characters long")]
         public string LastName { get; set; }
 
-        [Display(Name = "Email address")]
-        [Required(ErrorMessage = "The email address is required")]
+        [Display(Name = "Email Address")]
+        [Required(ErrorMessage = "The Email Address is required")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
 
@@ -29,6 +31,8 @@
 
         [Display(Name = "Date Of Birth")]
         [Required(ErrorMessage = "The Date Of Birth is required")]
+        [DataType(DataType.Date, ErrorMessage = "The Date Of Birth is required")]
+        [CurrentYearMaxValueAttribute(1900)]
         public DateTime DateOfBirth { get; set; }
 
         [Display(Name = "Monthly Salary")]
