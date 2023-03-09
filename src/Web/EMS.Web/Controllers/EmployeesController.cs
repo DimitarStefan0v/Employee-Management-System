@@ -90,5 +90,12 @@
 
             return this.RedirectToAction(nameof(this.ById), new { id });
         }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.employeesService.DeleteAsync(id);
+
+            return this.RedirectToAction(nameof(this.All));
+        }
     }
 }

@@ -83,17 +83,16 @@ body {
     border: 1px solid;
     border-radius: 15px;
     padding: 5px 3px;
-    margin: 10px;
+    margin: 10px 5px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    width: 29%;
 }
 
 .fa-user {
-    font-size: 125px;
+    font-size: 150px;
     padding: 3px;
 }
 
@@ -155,14 +154,16 @@ body {
 
 
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1285px) {
     .employees-wrapper {
         flex-direction: column;
         align-items: center;
     }
 
     .single-employee-wrapper {
-        width: 60%;
+        width: fit-content;
+        width: 55%;
+        justify-content: space-around;
     }
 }
 

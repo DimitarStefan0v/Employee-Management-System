@@ -21,6 +21,27 @@
     </section>
     <ul class="employee-btns">
         <li><a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Edit</a></li>
-        <li><a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a></li>
+        <li>
+            <form method="post" asp-action="Delete" asp-route-id="@Model.Id">
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Please confirm</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete the employee?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button class="btn btn-danger">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </li>
     </ul>
 </section>
