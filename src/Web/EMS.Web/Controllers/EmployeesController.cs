@@ -60,7 +60,8 @@
 
         public IActionResult ById(int id)
         {
-            return this.View();
+            var viewModel = this.employeesService.GetById<SingleEmployeeViewModel>(id);
+            return this.View(viewModel);
         }
     }
 }

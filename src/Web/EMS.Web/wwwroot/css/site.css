@@ -108,6 +108,13 @@ body {
     margin: 0;
 }
 
+.single-employee-wrapper-link {
+    color: black;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
 @media screen and (max-width: 1000px) {
     .employees-wrapper {
         flex-direction: column;
