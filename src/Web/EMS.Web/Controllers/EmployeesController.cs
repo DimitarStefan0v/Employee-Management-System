@@ -63,5 +63,32 @@
             var viewModel = this.employeesService.GetById<SingleEmployeeViewModel>(id);
             return this.View(viewModel);
         }
+
+        public IActionResult Edit(int id)
+        {
+            var inputModel = this.employeesService.GetById<EditEmployeeInputModel>(id);
+            return this.View(inputModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditEmployeeInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            try
+            {
+                await this.employeesService.UpdateAsync(id, input);
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                return this.View(input);
+            }
+
+            return this.RedirectToAction(nameof(this.ById), new { id });
+        }
     }
 }

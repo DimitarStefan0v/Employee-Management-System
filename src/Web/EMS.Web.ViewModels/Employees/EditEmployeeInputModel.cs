@@ -1,6 +1,9 @@
 ﻿namespace EMS.Web.ViewModels.Employees
 {
-    public class EditEmployeeInputModel : BaseEmployeeInputModel
+    using EMS.Data.Models;
+    using EMS.Services.Mapping;
+
+    public class EditEmployeeInputModel : BaseEmployeeInputModel, IMapFrom<Employee>
     {
     }
 }

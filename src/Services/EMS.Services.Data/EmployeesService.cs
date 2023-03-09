@@ -20,6 +20,9 @@
             this.employeesRepository = employeesRepository;
         }
 
+        /// <summary>
+        /// Create Employee and Add it to Database.
+        /// </summary>
         public async Task CreateAsync(CreateEmployeeInputModel input, string userId)
         {
             var employee = new Employee
@@ -37,6 +40,9 @@
             await this.employeesRepository.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Get All Employees.
+        /// </summary>
         public IEnumerable<T> GetAll<T>()
         {
             return this.employeesRepository
@@ -45,6 +51,9 @@
                 .ToList();
         }
 
+        /// <summary>
+        /// Get Employee by Id.
+        /// </summary>
         public T GetById<T>(int id)
         {
             return this.employeesRepository
@@ -54,6 +63,9 @@
                 .FirstOrDefault();
         }
 
+        /// <summary>
+        /// Update Employee.
+        /// </summary>
         public async Task UpdateAsync(int id, EditEmployeeInputModel input)
         {
             var employee = this.employeesRepository.All().FirstOrDefault(x => x.Id == id);
