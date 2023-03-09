@@ -16,6 +16,8 @@ namespace EMS.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.Employees = new HashSet<Employee>();
+            this.Assignments = new HashSet<Assignment>();
         }
 
         // Audit info
@@ -33,5 +35,9 @@ namespace EMS.Data.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        public virtual ICollection<Employee> Employees { get; set; }
+
+        public virtual ICollection<Assignment> Assignments { get; set; }
     }
 }
