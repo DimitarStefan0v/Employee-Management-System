@@ -44,5 +44,14 @@
                 .To<T>()
                 .ToList();
         }
+
+        public IEnumerable<T> GetById<T>(int id)
+        {
+            return this.employeesRepository
+                .AllAsNoTracking()
+                .Where(x => x.Id == id)
+                .To<T>()
+                .FirstOrDefault();
+        }
     }
 }

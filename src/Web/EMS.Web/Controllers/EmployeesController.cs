@@ -57,5 +57,10 @@
             viewModel.Employees = this.employeesService.GetAll<EmployeeInListViewModel>();
             return this.View(viewModel);
         }
+
+        public IActionResult ById(int id)
+        {
+            return this.View();
+        }
     }
 }

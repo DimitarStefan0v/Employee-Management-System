@@ -37,7 +37,7 @@
 
         [Display(Name = "Monthly Salary")]
         [Required(ErrorMessage = "The Monthly Salary is required")]
-        [Range(600, 20000, ErrorMessage = "The Monthly Salary must be between 600 and 10000 leva")]
+        [Range(600, 20000, ErrorMessage = "The Monthly Salary must be between 600 and 10000 euro")]
         public double MonthlySalary { get; set; }
     }
 }

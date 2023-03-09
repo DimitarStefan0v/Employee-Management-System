@@ -10,5 +10,7 @@
         Task CreateAsync(CreateEmployeeInputModel input, string userId);
 
         IEnumerable<T> GetAll<T>();
+
+        IEnumerable<T> GetById<T>(int id);
     }
 }

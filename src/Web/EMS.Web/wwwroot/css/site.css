@@ -12,6 +12,10 @@ a {
     color: #0366d6;
 }
 
+p {
+    word-break: break-all;
+}
+
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;
@@ -112,5 +116,12 @@ body {
 
     .single-employee-wrapper {
         width: 60%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .single-employee-wrapper {
+        width: 90%;
+        gap: 10px;
     }
 }

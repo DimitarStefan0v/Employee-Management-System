@@ -9,7 +9,7 @@
     {
         public Assignment()
         {
-            this.Employees = new HashSet<Employee>();
+            this.Employees = new HashSet<EmployeeAssignment>();
         }
 
         public string Title { get; set; }
@@ -18,7 +18,7 @@
 
         public DateTime DueDate { get; set; }
 
-        public ICollection<Employee> Employees { get; set; }
+        public ICollection<EmployeeAssignment> Employees { get; set; }
 
         public string AddedByUserId { get; set; }
 
