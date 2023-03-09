@@ -53,5 +53,21 @@
                 .To<T>()
                 .FirstOrDefault();
         }
+
+        public async Task UpdateAsync(int id, EditEmployeeInputModel input)
+        {
+            var employee = this.employeesRepository.All().FirstOrDefault(x => x.Id == id);
+            if (employee != null)
+            {
+                employee.FirstName = input.FirstName;
+                employee.LastName = input.LastName;
+                employee.PhoneNumber = input.PhoneNumber;
+                employee.DateOfBirth = input.DateOfBirth;
+                employee.Email = input.Email;
+                employee.MonthlySalary = input.MonthlySalary;
+
+                await this.employeesRepository.SaveChangesAsync();
+            }
+        }
     }
 }
