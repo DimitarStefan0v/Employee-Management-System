@@ -94,5 +94,14 @@
                 await this.employeesRepository.SaveChangesAsync();
             }
         }
+
+        public IEnumerable<T> GetByName<T>(string name)
+        {
+            return this.employeesRepository
+                .AllAsNoTracking()
+                .Where(x => x.FirstName.ToLower().Contains(name.ToLower()) || x.LastName.ToLower().Contains(name.ToLower()))
+                .To<T>()
+                .ToList();
+        }
     }
 }

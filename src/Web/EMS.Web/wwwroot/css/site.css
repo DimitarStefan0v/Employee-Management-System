@@ -89,10 +89,11 @@ body {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    max-width: 330px;
 }
 
 .fa-user {
-    font-size: 150px;
+    font-size: 160px;
     padding: 3px;
 }
 
@@ -143,9 +144,15 @@ body {
 }
 
 .container {
-    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    max-width: 1080px !important;
 }
 
+.container-fluid {
+    margin: 0 auto;
+    max-width: 1080px;
+}
 
 
 

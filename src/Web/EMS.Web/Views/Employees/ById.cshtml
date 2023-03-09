@@ -16,7 +16,6 @@
             <article class="employee-byId-wrapper-phone">Phone Number: <strong>@Model.PhoneNumber</strong></article>
             <article class="employee-byId-wrapper-birthday">Date of Birth: <strong>@Model.DateOfBirth.ToString("dddd, dd MMMM yyyy")</strong></article>
             <article class="employee-byId-wrapper-salary">Monthly Salary: <strong>@Model.MonthlySalary euro</strong></article>
-            <article class="employee-byId-wrapper-addedBy">Employee added to the system by: <strong>@(Model.AddedByUserUserName == null ? "Guest User" : Model.AddedByUserUserName)</strong></article>
         </article>
     </section>
     <ul class="employee-btns">

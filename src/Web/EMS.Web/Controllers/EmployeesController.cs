@@ -97,5 +97,12 @@
 
             return this.RedirectToAction(nameof(this.All));
         }
+
+        public IActionResult ByName(string search)
+        {
+            var viewModel = new EmployeesListViewModel();
+            viewModel.Employees = this.employeesService.GetByName<EmployeeInListViewModel>(search);
+            return this.View(viewModel);
+        }
     }
 }

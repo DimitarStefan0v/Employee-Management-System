@@ -13,6 +13,8 @@
 
         T GetById<T>(int id);
 
+        IEnumerable<T> GetByName<T>(string name);
+
         Task UpdateAsync(int id, EditEmployeeInputModel input);
 
         Task DeleteAsync(int id);
