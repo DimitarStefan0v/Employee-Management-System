@@ -5,6 +5,7 @@
     this.ViewData["Title"] = "All employees";
 }
 
+<h2 class="text-center">@this.ViewData["Title"]</h2>
 <section class="employees-wrapper">
     @foreach (var employee in Model.Employees)
     {

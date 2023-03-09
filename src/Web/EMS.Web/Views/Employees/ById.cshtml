@@ -1,2 +1,26 @@
 ﻿@using EMS.Web.ViewModels.Employees;
 @model SingleEmployeeViewModel
+
+@{
+    this.ViewData["Title"] = $"Employee: {Model.FirstName} {Model.LastName}";
+}
+
+<section class="byId-wrapper">
+    <h2 class="text-center">@this.ViewData["Title"]</h2>
+    <section class="employee-byId-wrapper">
+        <i class="fas fa-user byId"></i>
+        <article class="employee-byId-wrapper-details">
+            <article class="employee-byId-wrapper-firsName">First Name: <strong>@Model.FirstName</strong></article>
+            <article class="employee-byId-wrapper-lastName">Last Name: <strong>@Model.LastName</strong></article>
+            <article class="employee-byId-wrapper-email">Email: <strong>@Model.Email</strong></article>
+            <article class="employee-byId-wrapper-phone">Phone Number: <strong>@Model.PhoneNumber</strong></article>
+            <article class="employee-byId-wrapper-birthday">Date of Birth: <strong>@Model.DateOfBirth.ToString("dddd, dd MMMM yyyy")</strong></article>
+            <article class="employee-byId-wrapper-salary">Monthly Salary: <strong>@Model.MonthlySalary euro</strong></article>
+            <article class="employee-byId-wrapper-addedBy">Employee added to the system by: <strong>@(Model.AddedByUserUserName == null ? "Guest User" : Model.AddedByUserUserName)</strong></article>
+        </article>
+    </section>
+    <ul class="employee-btns">
+        <li><a class="btn btn-success">Edit</a></li>
+        <li><a class="btn btn-danger">Delete</a></li>
+    </ul>
+</section>

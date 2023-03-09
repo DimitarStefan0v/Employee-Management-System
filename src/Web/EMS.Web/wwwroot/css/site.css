@@ -115,6 +115,44 @@ body {
     padding: 0;
 }
 
+.employee-byId-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 18px;
+    margin: 20px;
+}
+
+.fa-user.byId {
+    font-size: 200px;
+}
+
+.employee-btns {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.byId-wrapper {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+
+
+
+
+
+
+
+
+
+
 @media screen and (max-width: 1000px) {
     .employees-wrapper {
         flex-direction: column;
