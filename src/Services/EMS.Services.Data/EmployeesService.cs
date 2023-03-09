@@ -81,5 +81,18 @@
                 await this.employeesRepository.SaveChangesAsync();
             }
         }
+
+        /// <summary>
+        /// Delete Employee(soft delete).
+        /// </summary>
+        public async Task DeleteAsync(int id)
+        {
+            var employee = this.employeesRepository.All().FirstOrDefault(x => x.Id == id);
+            if (employee != null)
+            {
+                this.employeesRepository.Delete(employee);
+                await this.employeesRepository.SaveChangesAsync();
+            }
+        }
     }
 }

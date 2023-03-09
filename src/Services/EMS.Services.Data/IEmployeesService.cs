@@ -14,5 +14,7 @@
         T GetById<T>(int id);
 
         Task UpdateAsync(int id, EditEmployeeInputModel input);
+
+        Task DeleteAsync(int id);
     }
 }
