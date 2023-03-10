@@ -97,6 +97,11 @@
 
         public IEnumerable<T> GetByName<T>(string name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return null;
+            }
+
             return this.employeesRepository
                 .AllAsNoTracking()
                 .Where(x => x.FirstName.ToLower().Contains(name.ToLower()) || x.LastName.ToLower().Contains(name.ToLower()))

@@ -103,6 +103,11 @@
             var viewModel = new EmployeesListViewModel();
             viewModel.Employees = this.employeesService.GetByName<EmployeeInListViewModel>(search);
             this.ViewData["name"] = search;
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                this.ViewData["invalidName"] = true;
+            }
+
             return this.View(viewModel);
         }
     }

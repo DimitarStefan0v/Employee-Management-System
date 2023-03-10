@@ -2,7 +2,18 @@
 @model EmployeesListViewModel
 
 @{
-    this.ViewData["Title"] = $"All employees with names containing {this.ViewData["name"]}";
+    this.ViewData["Title"] = $"All employees with names containing \"{ this.ViewData["name"]}\"";
 }
 
-<partial name="_EmployeesListPartial" model="@Model" />
+@if (this.ViewData["invalidName"] != null)
+{
+    <h2 class="text-center">There are no employees with blank names</h2>
+}
+else if (Model.Employees.Any())
+{
+    <partial name="_EmployeesListPartial" model="@Model" />
+} 
+else 
+{
+    <h2 class="text-center">No employees with names containing "@this.ViewData["name"]"</h2>
+}

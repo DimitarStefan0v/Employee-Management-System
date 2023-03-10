@@ -5,4 +5,7 @@
     this.ViewData["Title"] = "All employees";
 }
 
-<partial name="_EmployeesListPartial" model="@Model" />
+@if (Model.Employees.Any())
+{
+    <partial name="_EmployeesListPartial" model="@Model" />
+}
