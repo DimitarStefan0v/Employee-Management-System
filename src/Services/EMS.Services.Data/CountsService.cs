@@ -24,5 +24,13 @@
                 .AllAsNoTracking()
                 .Count();
         }
+
+        public int GetEmployeesCountByName(string name)
+        {
+            return this.employeesRepository
+                .AllAsNoTracking()
+                .Where(x => x.FirstName.ToLower().Contains(name.ToLower()) || x.LastName.ToLower().Contains(name.ToLower()))
+                .Count();
+        }
     }
 }

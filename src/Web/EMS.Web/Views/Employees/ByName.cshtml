@@ -2,7 +2,7 @@
 @model EmployeesListViewModel
 
 @{
-    this.ViewData["Title"] = $"All Employees with names containing \"{ this.ViewData["name"]}\"";
+    this.ViewData["Title"] = $"All Employees with names containing \"{this.ViewData["name"]}\"";
 }
 
 @if (this.ViewData["invalidName"] != null)
@@ -11,9 +11,19 @@
 }
 else if (Model.Employees.Any())
 {
+    <h2 class="text-center">@this.ViewData["Title"]</h2>
+    <partial name="_SortingPartial" model="@Model" />
     <partial name="_EmployeesListPartial" model="@Model" />
-} 
-else 
+    if (Model.PagesCount > 1)
+    {
+        <partial name="_PagingPartial" model="@Model" />
+    }
+}
+else
 {
     <h2 class="text-center">No employees with names containing "@this.ViewData["name"]"</h2>
+}
+
+@section Scripts{
+    <script src="~/js/disableCurrentSortLink.min.js" asp-append-version="true"></script>
 }

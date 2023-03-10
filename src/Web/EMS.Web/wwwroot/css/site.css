@@ -194,6 +194,32 @@ footer a:hover {
     color: #FFA400;
 }
 
+.sort-wrapper {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 6px;
+    font-size: 20px;
+}
+
+.sort-wrapper ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    flex-wrap: wrap;
+}
+
+.sort-wrapper ul li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+
 
 @media screen and (max-width: 1080px) {
     .employees-wrapper {
@@ -229,5 +255,9 @@ footer a:hover {
 @media screen and (max-width: 600px) {
     .single-employee-wrapper {
         flex-direction: column;
+    }
+
+    .sort-wrapper span {
+        display: none;
     }
 }

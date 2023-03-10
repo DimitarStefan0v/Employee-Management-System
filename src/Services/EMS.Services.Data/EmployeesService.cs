@@ -45,8 +45,13 @@
         /// </summary>
         public IEnumerable<T> GetAll<T>(string sort, int page, int itemsPerPage)
         {
-            return this.employeesRepository
+            var query = this.employeesRepository
                 .AllAsNoTracking()
+                .AsQueryable();
+
+            SortEmployees(ref sort, ref query);
+
+            return query
                 .Skip((page - 1) * itemsPerPage)
                 .Take(itemsPerPage)
                 .To<T>()
@@ -100,11 +105,25 @@
         /// <summary>
         /// Get Employee by Name.
         /// </summary>
-        public IEnumerable<T> GetByName<T>(string name)
+        public IEnumerable<T> GetByName<T>(string name, string sort, int page, int itemsPerPage)
         {
-            return this.employeesRepository
+            var query = this.employeesRepository
                 .AllAsNoTracking()
                 .Where(x => x.FirstName.ToLower().Contains(name.ToLower()) || x.LastName.ToLower().Contains(name.ToLower()))
+                .AsQueryable();
+
+            if (query.Count() > 1)
+            {
+                SortEmployees(ref sort, ref query);
+
+                return query
+                    .Skip((page - 1) * itemsPerPage)
+                    .Take(itemsPerPage)
+                    .To<T>()
+                    .ToList();
+            }
+
+            return query
                 .To<T>()
                 .ToList();
         }
@@ -117,6 +136,54 @@
             return this.employeesRepository
                 .AllAsNoTracking()
                 .Any(x => x.FirstName.ToLower() == firstName.ToLower().Trim() && x.LastName.ToLower() == lastName.ToLower().Trim());
+        }
+
+        /// <summary>
+        /// Sort Employees.
+        /// </summary>
+        private static void SortEmployees(ref string sort, ref IQueryable<Employee> query)
+        {
+            if (sort == null)
+            {
+                sort = "ascending";
+            }
+
+            sort = sort.ToLower().Trim();
+
+            switch (sort)
+            {
+                case "ascending":
+                    query = query
+                        .OrderBy(x => x.DateOfBirth)
+                        .ThenBy(x => x.FirstName)
+                        .ThenBy(x => x.LastName);
+                    break;
+                case "descending":
+                    query = query
+                        .OrderByDescending(x => x.DateOfBirth)
+                        .ThenBy(x => x.FirstName)
+                        .ThenBy(x => x.LastName);
+                    break;
+                case "tasks":
+                    query = query
+                        .OrderByDescending(x => x.Assignments.Select(a => a.Finished).Count())
+                        .ThenBy(x => x.FirstName)
+                        .ThenBy(x => x.LastName);
+                    break;
+                case "salary":
+                    query = query
+                        .OrderByDescending(x => x.MonthlySalary)
+                        .ThenBy(x => x.FirstName)
+                        .ThenBy(x => x.LastName);
+                    break;
+                default:
+                    sort = "ascending";
+                    query = query
+                        .OrderBy(x => x.DateOfBirth)
+                        .ThenBy(x => x.FirstName)
+                        .ThenBy(x => x.LastName);
+                    break;
+            }
         }
     }
 }

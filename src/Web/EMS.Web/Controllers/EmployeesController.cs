@@ -60,7 +60,7 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
-        public IActionResult All(string sortOrder = "descending", int page = 1)
+        public IActionResult All(string sortOrder = "ascending", int page = 1)
         {
             if (page <= 0)
             {
@@ -128,18 +128,35 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
-        public IActionResult ByName(string search)
+        public IActionResult ByName(string search, string sortOrder = "ascending", int page = 1)
         {
-            var viewModel = new EmployeesListViewModel();
-
             if (string.IsNullOrWhiteSpace(search))
             {
                 this.ViewData["invalidName"] = true;
-                return this.View(viewModel);
+                return this.View();
+            }
+
+            if (page <= 0)
+            {
+                return this.NotFound();
             }
 
             search = search.Trim();
-            viewModel.Employees = this.employeesService.GetByName<EmployeeInListViewModel>(search);
+
+            var itemsPerPage = 6;
+
+            var viewModel = new EmployeesListViewModel
+            {
+                ItemsPerPage = itemsPerPage,
+                PageNumber = page,
+                ItemsCount = this.countsService.GetEmployeesCountByName(search),
+                ControllerName = this.ControllerContext.ActionDescriptor.ControllerName,
+                ActionName = this.ControllerContext.ActionDescriptor.ActionName,
+                SortOrder = sortOrder,
+                Search = search,
+                Employees = this.employeesService.GetByName<EmployeeInListViewModel>(search, sortOrder, page, itemsPerPage),
+            };
+
             this.ViewData["name"] = search;
 
             return this.View(viewModel);

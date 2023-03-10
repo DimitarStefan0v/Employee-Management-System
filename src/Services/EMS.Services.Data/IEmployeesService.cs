@@ -13,7 +13,7 @@
 
         T GetById<T>(int id);
 
-        IEnumerable<T> GetByName<T>(string name);
+        IEnumerable<T> GetByName<T>(string name, string sort, int page, int itemsPerPage);
 
         Task UpdateAsync(int id, EditEmployeeInputModel input);
 
