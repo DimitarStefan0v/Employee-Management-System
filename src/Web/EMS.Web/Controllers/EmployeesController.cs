@@ -12,13 +12,16 @@
     public class EmployeesController : BaseController
     {
         private readonly IEmployeesService employeesService;
+        private readonly ICountsService countsService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public EmployeesController(
             IEmployeesService employeesService,
+            ICountsService countsService,
             UserManager<ApplicationUser> userManager)
         {
             this.employeesService = employeesService;
+            this.countsService = countsService;
             this.userManager = userManager;
         }
 
@@ -57,10 +60,31 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
-        public IActionResult All()
+        public IActionResult All(string sortOrder = "descending", int page = 1)
         {
-            var viewModel = new EmployeesListViewModel();
-            viewModel.Employees = this.employeesService.GetAll<EmployeeInListViewModel>();
+            if (page <= 0)
+            {
+                return this.NotFound();
+            }
+
+            var itemsPerPage = 2;
+
+            var viewModel = new EmployeesListViewModel
+            {
+                ItemsPerPage = itemsPerPage,
+                PageNumber = page,
+                ItemsCount = this.countsService.GetEmployeesCount(),
+                ControllerName = this.ControllerContext.ActionDescriptor.ControllerName,
+                ActionName = this.ControllerContext.ActionDescriptor.ActionName,
+                SortOrder = sortOrder,
+                Employees = this.employeesService.GetAll<EmployeeInListViewModel>(),
+            };
+
+            if (page > viewModel.PagesCount && viewModel.PagesCount > 0)
+            {
+                return this.NotFound();
+            }
+
             return this.View(viewModel);
         }
 
