@@ -41,13 +41,16 @@
         </nav>
     </header>
     
-    <div class="container">
+    <div class="pages-container">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @this.RenderBody()
         </main>
     </div>
     
+    <footer>
+        <a href="https://github.com/DimitarStefan0v/Employee-Management-System" title="Open Source System"><span>&copy; @(DateTime.Now.Year + " - " + GlobalConstants.SystemName) - Open Source System</span></a>
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>

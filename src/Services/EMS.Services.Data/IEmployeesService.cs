@@ -9,7 +9,7 @@
     {
         Task CreateAsync(CreateEmployeeInputModel input, string userId);
 
-        IEnumerable<T> GetAll<T>();
+        IEnumerable<T> GetAll<T>(string sort, int page, int itemsPerPage);
 
         T GetById<T>(int id);
 

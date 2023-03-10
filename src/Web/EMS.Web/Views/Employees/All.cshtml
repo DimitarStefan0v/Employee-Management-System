@@ -2,10 +2,12 @@
 @model EmployeesListViewModel
 
 @{
-    this.ViewData["Title"] = "All employees";
+    this.ViewData["Title"] = "All Employees";
 }
 
 @if (Model.Employees.Any())
 {
     <partial name="_EmployeesListPartial" model="@Model" />
 }
+
+<partial name="_PagingPartial" model="@Model" />

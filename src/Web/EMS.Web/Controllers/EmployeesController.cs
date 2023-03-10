@@ -67,7 +67,7 @@
                 return this.NotFound();
             }
 
-            var itemsPerPage = 2;
+            var itemsPerPage = 6;
 
             var viewModel = new EmployeesListViewModel
             {
@@ -77,7 +77,7 @@
                 ControllerName = this.ControllerContext.ActionDescriptor.ControllerName,
                 ActionName = this.ControllerContext.ActionDescriptor.ActionName,
                 SortOrder = sortOrder,
-                Employees = this.employeesService.GetAll<EmployeeInListViewModel>(),
+                Employees = this.employeesService.GetAll<EmployeeInListViewModel>(sortOrder, page, itemsPerPage),
             };
 
             if (page > viewModel.PagesCount && viewModel.PagesCount > 0)

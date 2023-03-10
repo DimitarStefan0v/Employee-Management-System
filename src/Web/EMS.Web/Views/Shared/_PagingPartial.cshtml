@@ -1,0 +1,55 @@
+﻿@model PagingViewModel
+
+<nav aria-label="..." class="paging">
+    <ul class="pagination justify-content-center">
+        @if (Model.HasPreviousPage)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" asp-route-search="@Model.Search" asp-route-sortOrder="@Model.SortOrder" asp-route-page="@Model.PreviousPageNumber">Previous</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">Previous</a>
+            </li>
+        }
+
+        @for (int i = this.Model.PageNumber - 3; i < this.Model.PageNumber; i++)
+        {
+            if (i > 0)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" asp-route-search="@Model.Search" asp-route-sortOrder="@Model.SortOrder" asp-route-page="@i">@i</a>
+                </li>
+            }
+        }
+
+        <li class="page-item active" aria-current="page">
+            <span class="page-link">@Model.PageNumber</span>
+        </li>
+
+        @for (int i = this.Model.PageNumber + 1; i < this.Model.PageNumber + 4; i++)
+        {
+            if (i <= this.Model.PagesCount)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" asp-route-search="@Model.Search" asp-route-sortOrder="@Model.SortOrder" asp-route-page="@i">@i</a>
+                </li>
+            }
+        }
+
+        @if (Model.HasNextPage)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-controller="@Model.ControllerName" asp-action="@Model.ActionName" asp-route-search="@Model.Search" asp-route-sortOrder="@Model.SortOrder" asp-route-page="@Model.NextPageNumber">Next</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">Next</a>
+            </li>
+        }
+    </ul>
+</nav>

@@ -5,18 +5,18 @@
 <section class="employees-wrapper">
     @foreach (var employee in Model.Employees)
     {
-        <article class="single-employee-wrapper">
-            <a class="single-employee-wrapper-link" asp-action="ById" asp-route-id="@employee.Id">
+        <a class="single-employee-link" asp-action="ById" asp-route-id="@employee.Id">
+            <article class="single-employee-wrapper">
                 <i class="fas fa-user"></i>
-            </a>
-            <ul>
-                <li><p class="single-employee-wrapper-fullname">Names: <strong>@(employee.FirstName + " " + employee.LastName)</strong></p></li>
-                <li><p class="single-employee-wrapper-email">Email: <strong>@employee.Email</strong></p></li>
-                <li><p class="single-employee-wrapper-phone">Phone Number: <strong>@employee.PhoneNumber</strong></p></li>
-                <li><p class="single-employee-wrapper-birthday">Birthday: <strong>@employee.DateOfBirth.ToString("dddd, dd MMMM yyyy")</strong></p></li>
-                <li><p class="single-employee-wrapper-salary">Monthly Salary: <strong>@(Math.Round(employee.MonthlySalary, 2)) euro</strong></p></li>
-                <li><p class="single-employee-wrapper-finishedTasks">Completed Tasks: <strong>@employee.FinishedTasks</strong></p></li>
-            </ul>
-        </article>
+                <ul>
+                    <li><p class="single-employee-wrapper-fullname">Names: <strong>@(employee.FullName.Length > 30 ? employee.FullName.Substring(0, 30) + "..." : employee.FullName)</strong></p></li>
+                    <li><p class="single-employee-wrapper-email">Email: <strong>@(employee.Email.Length > 30 ? employee.Email.Substring(0, 30) + "..." : employee.Email)</strong></p></li>
+                    <li><p class="single-employee-wrapper-phone">Phone Number: <strong>@employee.PhoneNumber</strong></p></li>
+                    <li><p class="single-employee-wrapper-birthday">Birthday: <strong>@employee.DateOfBirth.ToString("dddd, dd MMMM yyyy")</strong></p></li>
+                    <li><p class="single-employee-wrapper-salary">Monthly Salary: <strong>@(Math.Round(employee.MonthlySalary, 2)) euro</strong></p></li>
+                    <li><p class="single-employee-wrapper-finishedTasks">Completed Tasks: <strong>@employee.FinishedTasks</strong></p></li>
+                </ul>
+            </article>
+        </a>
     }
 </section>

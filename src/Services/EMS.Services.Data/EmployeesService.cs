@@ -43,10 +43,12 @@
         /// <summary>
         /// Get All Employees.
         /// </summary>
-        public IEnumerable<T> GetAll<T>()
+        public IEnumerable<T> GetAll<T>(string sort, int page, int itemsPerPage)
         {
             return this.employeesRepository
                 .AllAsNoTracking()
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
                 .To<T>()
                 .ToList();
         }
