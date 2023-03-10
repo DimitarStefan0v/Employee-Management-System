@@ -18,5 +18,7 @@
         Task UpdateAsync(int id, EditEmployeeInputModel input);
 
         Task DeleteAsync(int id);
+
+        bool CheckIfEmployeeExist(string firstName, string lastName);
     }
 }

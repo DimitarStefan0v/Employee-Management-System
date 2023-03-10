@@ -27,13 +27,13 @@
         {
             var employee = new Employee
             {
-                FirstName = input.FirstName,
-                LastName = input.LastName,
-                Email = input.Email,
-                PhoneNumber = input.PhoneNumber,
+                FirstName = input.FirstName.Trim(),
+                LastName = input.LastName.Trim(),
+                Email = input.Email.Trim(),
+                PhoneNumber = input.PhoneNumber.Trim(),
                 DateOfBirth = input.DateOfBirth,
                 MonthlySalary = input.MonthlySalary,
-                AddedByUserId = userId == null ? null : userId,
+                AddedByUserId = userId,
             };
 
             await this.employeesRepository.AddAsync(employee);
@@ -95,18 +95,26 @@
             }
         }
 
+        /// <summary>
+        /// Get Employee by Name.
+        /// </summary>
         public IEnumerable<T> GetByName<T>(string name)
         {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                return null;
-            }
-
             return this.employeesRepository
                 .AllAsNoTracking()
                 .Where(x => x.FirstName.ToLower().Contains(name.ToLower()) || x.LastName.ToLower().Contains(name.ToLower()))
                 .To<T>()
                 .ToList();
+        }
+
+        /// <summary>
+        /// Check If Employee with the same Names exists.
+        /// </summary>
+        public bool CheckIfEmployeeExist(string firstName, string lastName)
+        {
+            return this.employeesRepository
+                .AllAsNoTracking()
+                .Any(x => x.FirstName.ToLower() == firstName.ToLower().Trim() && x.LastName.ToLower() == lastName.ToLower().Trim());
         }
     }
 }

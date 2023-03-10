@@ -72,6 +72,10 @@ body {
     flex-direction: column;
 }
 
+nav {
+    margin-bottom: 20px;
+}
+
 .employees-wrapper {
     display: flex;
     flex-direction: row;

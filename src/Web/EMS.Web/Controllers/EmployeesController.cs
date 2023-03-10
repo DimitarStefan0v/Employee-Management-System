@@ -36,6 +36,12 @@
                 return this.View(input);
             }
 
+            if (this.employeesService.CheckIfEmployeeExist(input.FirstName, input.LastName))
+            {
+                this.ModelState.AddModelError(string.Empty, "There is already a employee with the same first and last name");
+                return this.View(input);
+            }
+
             var user = await this.userManager.GetUserAsync(this.User);
 
             try
@@ -101,12 +107,16 @@
         public IActionResult ByName(string search)
         {
             var viewModel = new EmployeesListViewModel();
-            viewModel.Employees = this.employeesService.GetByName<EmployeeInListViewModel>(search);
-            this.ViewData["name"] = search;
+
             if (string.IsNullOrWhiteSpace(search))
             {
                 this.ViewData["invalidName"] = true;
+                return this.View(viewModel);
             }
+
+            search = search.Trim();
+            viewModel.Employees = this.employeesService.GetByName<EmployeeInListViewModel>(search);
+            this.ViewData["name"] = search;
 
             return this.View(viewModel);
         }
