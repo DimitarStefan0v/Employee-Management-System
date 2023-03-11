@@ -27,7 +27,7 @@
             <input type="submit" value="Assign" class="btn btn-primary" />
         </form>
     </div>
-    <ul class="employee-btns">
+    <ul class="employee-btns mb-3">
         <li><a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Edit</a></li>
         <li>
             <form method="post" asp-action="Delete" asp-route-id="@Model.Id">
@@ -52,4 +52,42 @@
             </form>
         </li>
     </ul>
+    <article class="employee-byId-wrapper-pendingAssignments mb-4">
+        <h4 class="text-center">Pending Tasks</h4>
+        @if (Model.PendingAssignments.Count == 0)
+        {
+            <p>This employee don't have pending tasks</p>
+        }
+        else
+        {
+            @foreach (var task in Model.PendingAssignments)
+            {
+                <article class="pendingAssignments">
+                    <p>Task: @task.Title</p>
+                    <p>Start Date: @task.StartDate.ToString("dddd, dd MMMM yyyy")</p>
+                    <p>Due Date: @task.DueDate.ToString("dddd, dd MMMM yyyy")</p>
+                    <a class="btn btn-success" asp-action="CompleteTask" asp-route-employeeId="@Model.Id" asp-route-assignmentId="@task.Id">Complete Task</a>
+                </article>
+            }
+        }
+    </article>
+    <article class="employee-byId-wrapper-finishedAssignments mb-4">
+        <h4 class="text-center">Completed Tasks</h4>
+        @if (Model.FinishedAssignments.Count == 0)
+        {
+            <p>This employee hasn't completed a task</p>
+        }
+        else
+        {
+            @foreach (var task in Model.FinishedAssignments)
+            {
+                <article class="finishedAssignments">
+                    <p>Task: @task.Title</p>
+                    <p>Start Date: @task.StartDate.ToString("dddd, dd MMMM yyyy")</p>
+                    <p>Due Date: @task.DueDate.ToString("dddd, dd MMMM yyyy")</p>
+                    <p>Completed Date: @task.CompletedDate.Value.ToString("dddd, dd MMMM yyyy")</p>
+                </article>
+            }
+        }
+    </article>
 </section>

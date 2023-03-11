@@ -18,7 +18,11 @@
 
         public DateTime DueDate { get; set; }
 
+        public DateTime? CompletedDate { get; set; }
+
         public string AssignedEmployee { get; set; }
+
+        public bool Finished { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

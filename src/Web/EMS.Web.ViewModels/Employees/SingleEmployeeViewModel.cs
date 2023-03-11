@@ -14,6 +14,8 @@
         [Display(Name = "Assignment")]
         public int AssignmentId { get; set; }
 
+        public ICollection<AssignmentsViewModel> Assignments { get; set; }
+
         public ICollection<AssignmentsViewModel> PendingAssignments { get; set; }
 
         public ICollection<AssignmentsViewModel> FinishedAssignments { get; set; }

@@ -258,8 +258,21 @@ footer a:hover {
     gap: 3px;
 }
 
+.employee-byId-wrapper-pendingAssignments p,
+.employee-byId-wrapper-finishedAssignments p {
+    padding: 0;
+    margin: 0;
+}
 
-
+.finishedAssignments,
+.pendingAssignments {
+    background-color: #F8F9FA;
+    border: 1px solid;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 7px;
+    width: 320px;
+}
 
 
 
