@@ -1,5 +1,7 @@
 ﻿namespace EMS.Web
 {
+    using System;
+    using System.Globalization;
     using System.Reflection;
 
     using EMS.Data;
@@ -12,7 +14,6 @@
     using EMS.Services.Mapping;
     using EMS.Services.Messaging;
     using EMS.Web.ViewModels;
-
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -93,7 +94,15 @@
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = ctx =>
+                {
+                    // Cache static files for 30 days
+                    ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=2592000");
+                    ctx.Context.Response.Headers.Append("Expires", DateTime.UtcNow.AddDays(30).ToString("R", CultureInfo.InvariantCulture));
+                },
+            });
             app.UseCookiePolicy();
 
             app.UseRouting();
