@@ -19,12 +19,6 @@
 
         IEnumerable<T> GetAllCompleted<T>(string sort, int page, int itemsPerPage);
 
-        IEnumerable<T> GetAllPendingAssignmentsForDropDown<T>();
-
-        IEnumerable<AssignmentsViewModel> GetAllPendingAssignmentsByUserId(int id);
-
-        IEnumerable<AssignmentsViewModel> GetAllFinishedAssignmentsByUserId(int id);
-
         T GetById<T>(int id);
 
         bool CheckIfAssignmentExist(string title);
