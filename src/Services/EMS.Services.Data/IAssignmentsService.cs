@@ -11,10 +11,24 @@
 
         Task UpdateAsync(int id, EditAssignmentInputModel input);
 
+        Task DeleteAsync(int id);
+
         IEnumerable<T> GetAll<T>(string sort, int page, int itemsPerPage);
+
+        IEnumerable<T> GetAllPending<T>(string sort, int page, int itemsPerPage);
+
+        IEnumerable<T> GetAllCompleted<T>(string sort, int page, int itemsPerPage);
+
+        IEnumerable<T> GetAllPendingAssignmentsForDropDown<T>();
+
+        IEnumerable<AssignmentsViewModel> GetAllPendingAssignmentsByUserId(int id);
+
+        IEnumerable<AssignmentsViewModel> GetAllFinishedAssignmentsByUserId(int id);
 
         T GetById<T>(int id);
 
         bool CheckIfAssignmentExist(string title);
+
+        Task AssignToEmployee(int employeeId, int assignmentId);
     }
 }

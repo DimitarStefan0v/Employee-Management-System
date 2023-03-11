@@ -1,6 +1,5 @@
 ﻿namespace EMS.Services.Data
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -13,11 +12,14 @@
     public class AssignmentsService : IAssignmentsService
     {
         private readonly IDeletableEntityRepository<Assignment> assignmentsRepository;
+        private readonly IDeletableEntityRepository<Employee> employeesRepository;
 
         public AssignmentsService(
-            IDeletableEntityRepository<Assignment> assignmentsRepository)
+            IDeletableEntityRepository<Assignment> assignmentsRepository,
+            IDeletableEntityRepository<Employee> employeesRepository)
         {
             this.assignmentsRepository = assignmentsRepository;
+            this.employeesRepository = employeesRepository;
         }
 
         /// <summary>
@@ -102,6 +104,145 @@
         }
 
         /// <summary>
+        /// Delete Assignment.
+        /// </summary>
+        public async Task DeleteAsync(int id)
+        {
+            var assignment = this.assignmentsRepository.All().FirstOrDefault(x => x.Id == id);
+            if (assignment != null)
+            {
+                this.assignmentsRepository.Delete(assignment);
+                await this.assignmentsRepository.SaveChangesAsync();
+            }
+        }
+
+        /// <summary>
+        /// Get All Pending Assignments.
+        /// </summary>">
+        public IEnumerable<T> GetAllPending<T>(string sort, int page, int itemsPerPage)
+        {
+            var query = this.assignmentsRepository
+                            .AllAsNoTracking()
+                            .Where(x => x.Finished == false)
+                            .AsQueryable();
+
+            SortEmployees(ref sort, ref query);
+
+            return query
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .To<T>()
+                .ToList();
+        }
+
+        /// <summary>
+        /// Get All Completed Assignments.
+        /// </summary>
+        public IEnumerable<T> GetAllCompleted<T>(string sort, int page, int itemsPerPage)
+        {
+            var query = this.assignmentsRepository
+                            .AllAsNoTracking()
+                            .Where(x => x.Finished == true)
+                            .AsQueryable();
+
+            SortEmployees(ref sort, ref query);
+
+            return query
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .To<T>()
+                .ToList();
+        }
+
+        /// <summary>
+        /// Assign Task to Employee.
+        /// </summary>
+        public async Task AssignToEmployee(int employeeId, int assignmentId)
+        {
+            var assignment = this.assignmentsRepository
+                .All()
+                .FirstOrDefault(x => x.Id == assignmentId);
+
+            var employee = this.employeesRepository
+                .All()
+                .FirstOrDefault(x => x.Id == employeeId);
+
+            if (employee != null && assignment != null && assignment.Finished == false)
+            {
+                employee.Assignments.Add(assignment);
+                await this.employeesRepository.SaveChangesAsync();
+            }
+        }
+
+        /// <summary>
+        /// Get All Pending Assignments for Dropdown model.
+        /// </summary>
+        public IEnumerable<T> GetAllPendingAssignmentsForDropDown<T>()
+        {
+            return this.assignmentsRepository
+                .AllAsNoTracking()
+                .OrderBy(x => x.Title)
+                .To<T>()
+                .ToList();
+        }
+
+        /// <summary>
+        /// Get All Pending Assignments for specific User.
+        /// </summary>
+        public IEnumerable<AssignmentsViewModel> GetAllPendingAssignmentsByUserId(int id)
+        {
+            var employee = this.employeesRepository
+                .AllAsNoTracking()
+                .FirstOrDefault(x => x.Id == id);
+
+            var result = new List<AssignmentsViewModel>();
+
+            foreach (var assignment in employee.Assignments)
+            {
+                if (assignment.Finished == false)
+                {
+                    var pendingAssignment = new AssignmentsViewModel
+                    {
+                        Id = assignment.Id,
+                        Title = assignment.Title,
+                    };
+
+                    result.Add(pendingAssignment);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Get All Finished Assignments for specific User.
+        /// </summary>
+        public IEnumerable<AssignmentsViewModel> GetAllFinishedAssignmentsByUserId(int id)
+        {
+            var employee = this.employeesRepository
+                .AllAsNoTracking()
+                .FirstOrDefault(x => x.Id == id);
+
+            var result = new List<AssignmentsViewModel>();
+
+            foreach (var assignment in employee.Assignments)
+            {
+                if (assignment.Finished == false)
+                {
+                    var pendingAssignment = new AssignmentsViewModel
+                    {
+                        Id = assignment.Id,
+                        Title = assignment.Title,
+                    };
+
+                    result.Add(pendingAssignment);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Sort Assignments.
         /// </summary>
         private static void SortEmployees(ref string sort, ref IQueryable<Assignment> query)
@@ -127,8 +268,8 @@
                     break;
                 case "title":
                     query = query
-                        .OrderByDescending(x => x.Title)
-                        .ThenBy(x => x.DueDate);
+                        .OrderBy(x => x.Title)
+                        .ThenBy(x => x.Description);
                     break;
                 default:
                     sort = "startdate";

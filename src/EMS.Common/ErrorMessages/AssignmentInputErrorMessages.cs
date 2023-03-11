@@ -26,7 +26,7 @@
 
         public const string DescriptionMinLength = "The Description must be at least 8 characters long";
 
-        public const string DescriptionMaxLength = "The Description can't be more than 500 characters long";
+        public const string DescriptionMaxLength = "The Description can't be more than 2000 characters long";
 
         /// <summary>
         /// StartDate Messages.

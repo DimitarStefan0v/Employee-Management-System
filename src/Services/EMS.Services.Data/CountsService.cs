@@ -43,5 +43,21 @@
                 .Where(x => x.FirstName.ToLower().Contains(name.ToLower()) || x.LastName.ToLower().Contains(name.ToLower()))
                 .Count();
         }
+
+        public int GetPendingAssignments()
+        {
+            return this.assignmentsRepository
+                .AllAsNoTracking()
+                .Where(x => x.Finished == false)
+                .Count();
+        }
+
+        public int GetCompletedAssignments()
+        {
+            return this.assignmentsRepository
+                .AllAsNoTracking()
+                .Where(x => x.Finished == true)
+                .Count();
+        }
     }
 }
