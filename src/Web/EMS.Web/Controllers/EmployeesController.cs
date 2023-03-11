@@ -1,11 +1,13 @@
 ﻿namespace EMS.Web.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using EMS.Common.ErrorMessages;
     using EMS.Data.Models;
     using EMS.Services.Data;
+    using EMS.Web.ViewModels.Assignments;
     using EMS.Web.ViewModels.Employees;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -14,15 +16,18 @@
     {
         private readonly IEmployeesService employeesService;
         private readonly ICountsService countsService;
+        private readonly IAssignmentsService assignmentsService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public EmployeesController(
             IEmployeesService employeesService,
             ICountsService countsService,
+            IAssignmentsService assignmentsService,
             UserManager<ApplicationUser> userManager)
         {
             this.employeesService = employeesService;
             this.countsService = countsService;
+            this.assignmentsService = assignmentsService;
             this.userManager = userManager;
         }
 
@@ -92,6 +97,10 @@
         public IActionResult ById(int id)
         {
             var viewModel = this.employeesService.GetById<SingleEmployeeViewModel>(id);
+            viewModel.Assignments = (ICollection<AssignmentsViewModel>)this.assignmentsService.GetAllPendingAssignmentsForDropDown<AssignmentsViewModel>();
+            viewModel.PendingAssignments = (ICollection<AssignmentsViewModel>)this.assignmentsService.GetAllPendingAssignmentsByUserId(id);
+            viewModel.FinishedAssignments = (ICollection<AssignmentsViewModel>)this.assignmentsService.GetAllFinishedAssignmentsByUserId(id);
+
             return this.View(viewModel);
         }
 
@@ -161,6 +170,13 @@
             this.ViewData["name"] = search;
 
             return this.View(viewModel);
+        }
+
+        public async Task<IActionResult> AssignTask(int assignmentId, int employeeId)
+        {
+            await this.assignmentsService.AssignToEmployee(employeeId, assignmentId);
+            var id = employeeId;
+            return this.RedirectToAction(nameof(this.ById), new { id });
         }
     }
 }
