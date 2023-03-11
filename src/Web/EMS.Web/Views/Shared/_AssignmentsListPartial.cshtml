@@ -19,7 +19,29 @@
                     <li><p class="single-assignment-wrapper-employeesCount">Assignee: <strong>@(assignment.AssignedEmployee == null ? "Not Assigned to anyone yet" : assignment.AssignedEmployee)</strong></p></li>
                     <li><p class="single-assignment-wrapper-status">Status: <strong>@(assignment.Finished == false ? "Pending" : "Finished on " + assignment.CompletedDate.Value.ToString("dd MMMM yyyy"))</strong></p></li>
                 }
-                <li class="assignment-btns"><a class="btn btn-success" asp-controller="Assignments" asp-action="Edit" asp-route-id="@assignment.Id">Edit</a><a class="btn btn-danger" asp-controller="Assignments" asp-action="Delete" asp-route-id="@assignment.Id">Delete</a></li>
+                <li class="assignment-btns">
+                    <a class="btn btn-success" asp-controller="Assignments" asp-action="Edit" asp-route-id="@assignment.Id">Edit</a>
+                    <form method="post" asp-controller="Assignments" asp-action="Delete" asp-route-id="@assignment.Id">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Please confirm</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete this task?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </li>
             </ul>
         </article>
     }
