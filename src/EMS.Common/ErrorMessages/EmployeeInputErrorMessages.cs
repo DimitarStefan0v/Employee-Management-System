@@ -16,6 +16,8 @@
 
         public const string FirstNameMaxLength = "The First Name can't be more than 50 characters long";
 
+        public const string DuplicateNames = "There is already a employee with the same first and last name";
+
         /// <summary>
         /// Last Name Messages.
         /// </summary>

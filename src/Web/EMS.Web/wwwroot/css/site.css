@@ -218,7 +218,9 @@ footer a:hover {
     color: inherit;
 }
 
-
+.sort-wrapper ul li a i {
+    padding-left: 2px;
+}
 
 
 @media screen and (max-width: 1080px) {

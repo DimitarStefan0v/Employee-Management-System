@@ -1,10 +1,10 @@
 ﻿@model PagingViewModel
 
 <section class="sort-wrapper">
-    <span>Order By:</span>
+    <span>Sort By:</span>
     <ul>
-        <li><a class="ascending-sort-link" asp-route-search="@Model.Search" asp-route-sortOrder="ascending" asp-route-id="1">Oldest</a></li>
-        <li><a class="descending-sort-link" asp-route-search="@Model.Search" asp-route-sortOrder="descending" asp-route-id="1">Youngest</a></li>
+        <li><a class="ascending-sort-link" asp-route-search="@Model.Search" asp-route-sortOrder="ascending" asp-route-id="1">Age<i class="fas fa-long-arrow-alt-up"></i></a></li>
+        <li><a class="descending-sort-link" asp-route-search="@Model.Search" asp-route-sortOrder="descending" asp-route-id="1">Age<i class="fas fa-long-arrow-alt-down"></i></a></li>
         <li><a class="completed-tasks-sort-link" asp-route-search="@Model.Search" asp-route-sortOrder="tasks" asp-route-id="1">Tasks</a></li>
         <li><a class="salary-sort-link" asp-route-search="@Model.Search" asp-route-sortOrder="salary" asp-route-id="1">Salary</a></li>
     </ul>
