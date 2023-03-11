@@ -200,7 +200,6 @@ footer a:hover {
     flex-direction: row;
     justify-content: center;
     gap: 6px;
-    font-size: 20px;
 }
 
 .sort-wrapper ul {
@@ -221,6 +220,43 @@ footer a:hover {
 .sort-wrapper ul li a i {
     padding-left: 2px;
 }
+
+.assignments-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.single-assignment-wrapper ul {
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin: 0;
+    list-style-type: none;
+    width: 620px;
+}
+
+.single-assignment-wrapper ul li {
+    padding: 3px;
+}
+
+.single-assignment-wrapper ul li p {
+    padding: 0;
+    margin: 0;
+}
+
+.assignment-btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+
+
 
 
 @media screen and (max-width: 1080px) {
@@ -251,6 +287,12 @@ footer a:hover {
 @media screen and (max-width: 800px) {
     .employees-wrapper {
         width: 100%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .single-assignment-wrapper ul {
+        width: 300px;
     }
 }
 

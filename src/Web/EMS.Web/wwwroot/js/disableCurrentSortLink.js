@@ -2,7 +2,7 @@
 
 function disableLink() {
     const orderValue = document.getElementById('sort-order-value').value;
-    const [asc, desc, tasks, salary] = [...document.querySelectorAll('.sort-wrapper ul li a')];
+    const [asc, desc, pendingTasks, finishedTasks, salary] = [...document.querySelectorAll('.sort-wrapper ul li a')];
 
     const obj = {
         'ascending': function () {
@@ -17,11 +17,17 @@ function disableLink() {
             desc.style.pointerEvents = 'none';
             desc.style.cursor = 'default';
         },
-        'tasks': function () {
-            tasks.style.color = 'red';
-            tasks.style.borderBottom = '5px solid red';
-            tasks.style.pointerEvents = 'none';
-            tasks.style.cursor = 'default';
+        'pending-tasks': function () {
+            pendingTasks.style.color = 'red';
+            pendingTasks.style.borderBottom = '5px solid red';
+            pendingTasks.style.pointerEvents = 'none';
+            pendingTasks.style.cursor = 'default';
+        },
+        'finished-tasks': function () {
+            finishedTasks.style.color = 'red';
+            finishedTasks.style.borderBottom = '5px solid red';
+            finishedTasks.style.pointerEvents = 'none';
+            finishedTasks.style.cursor = 'default';
         },
         'salary': function () {
             salary.style.color = 'red';
