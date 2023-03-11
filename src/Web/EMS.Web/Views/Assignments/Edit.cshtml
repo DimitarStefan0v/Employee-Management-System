@@ -1,0 +1,44 @@
+﻿@using EMS.Web.ViewModels.Assignments;
+@model EditAssignmentInputModel
+
+@{
+    this.ViewData["Title"] = "Edit Task";
+}
+
+<h2 class="text-center">@this.ViewData["Title"]</h2>
+<form method="post" class="col-md-10 col-lg-4 mx-auto" enctype="application/x-www-form-urlencoded">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" rows="7" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="StartDate" class="form-label"></label>
+        <input id="datepickerOne" name="StartDate" class="form-control" required />
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="DueDate" class="form-label"></label>
+        <input id="datepickerTwo" name="DueDate" class="form-control" required />
+        <span asp-validation-for="DueDate" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <input type="submit" value="Edit Task" class="btn btn-primary" />
+    </div>
+</form>
+
+<script>
+    $('#datepickerOne').datepicker({
+        uiLibrary: 'bootstrap5'
+    });
+    $('#datepickerTwo').datepicker({
+        uiLibrary: 'bootstrap5'
+    });
+</script>
+

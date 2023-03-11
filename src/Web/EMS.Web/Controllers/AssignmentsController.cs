@@ -95,5 +95,32 @@
 
             return this.View(viewModel);
         }
+
+        public IActionResult Edit(int id)
+        {
+            var viewModel = this.assignmentsService.GetById<EditAssignmentInputModel>(id);
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditAssignmentInputModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            try
+            {
+                await this.assignmentsService.UpdateAsync(id, model);
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                return this.View(model);
+            }
+
+            return this.RedirectToAction(nameof(this.All));
+        }
     }
 }

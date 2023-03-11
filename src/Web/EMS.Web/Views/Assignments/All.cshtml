@@ -31,7 +31,7 @@
                     <li><p class="single-assignment-wrapper-startDate">Start Date: <strong>@assignment.StartDate.ToString("dddd, dd MMMM yyyy")</strong></p></li>
                     <li><p class="single-assignment-wrapper-dueDate">Due Date: <strong>@assignment.DueDate.ToString("dddd, dd MMMM yyyy")</strong></p></li>
                     <li><p class="single-assignment-wrapper-employeesCount">Assignee: <strong>@(assignment.AssignedEmployee == null ? "Not Assigned to anyone yet" : assignment.AssignedEmployee)</strong></p></li>
-                    <li class="assignment-btns"><a class="btn btn-success">Edit</a><a class="btn btn-danger">Delete</a></li>
+                    <li class="assignment-btns"><a class="btn btn-success" asp-controller="Assignments" asp-action="Edit" asp-route-id="@assignment.Id">Edit</a><a class="btn btn-danger" asp-controller="Assignments" asp-action="Delete" asp-route-id="@assignment.Id">Delete</a></li>
                 </ul>
             </article>
         }
