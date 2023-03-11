@@ -75,7 +75,7 @@
                 return this.NotFound();
             }
 
-            var itemsPerPage = 6;
+            var itemsPerPage = 3;
 
             var viewModel = new AssignmentsListViewModel
             {
@@ -121,6 +121,68 @@
             }
 
             return this.RedirectToAction(nameof(this.All));
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.assignmentsService.DeleteAsync(id);
+            return this.RedirectToAction(nameof(this.All));
+        }
+
+        public IActionResult AllPending(string sortOrder = "startDate", int page = 1)
+        {
+            if (page <= 0)
+            {
+                return this.NotFound();
+            }
+
+            var itemsPerPage = 3;
+
+            var viewModel = new AssignmentsListViewModel
+            {
+                ItemsPerPage = itemsPerPage,
+                PageNumber = page,
+                ItemsCount = this.countsService.GetPendingAssignments(),
+                ControllerName = this.ControllerContext.ActionDescriptor.ControllerName,
+                ActionName = this.ControllerContext.ActionDescriptor.ActionName,
+                SortOrder = sortOrder,
+                Assignments = this.assignmentsService.GetAllPending<AssignmentInListViewModel>(sortOrder, page, itemsPerPage),
+            };
+
+            if (page > viewModel.PagesCount && viewModel.PagesCount > 0)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(viewModel);
+        }
+
+        public IActionResult AllCompleted(string sortOrder = "startDate", int page = 1)
+        {
+            if (page <= 0)
+            {
+                return this.NotFound();
+            }
+
+            var itemsPerPage = 3;
+
+            var viewModel = new AssignmentsListViewModel
+            {
+                ItemsPerPage = itemsPerPage,
+                PageNumber = page,
+                ItemsCount = this.countsService.GetCompletedAssignments(),
+                ControllerName = this.ControllerContext.ActionDescriptor.ControllerName,
+                ActionName = this.ControllerContext.ActionDescriptor.ActionName,
+                SortOrder = sortOrder,
+                Assignments = this.assignmentsService.GetAllCompleted<AssignmentInListViewModel>(sortOrder, page, itemsPerPage),
+            };
+
+            if (page > viewModel.PagesCount && viewModel.PagesCount > 0)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(viewModel);
         }
     }
 }
