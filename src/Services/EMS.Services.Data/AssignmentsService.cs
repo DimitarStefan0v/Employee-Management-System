@@ -31,6 +31,7 @@
                 Description = input.Description.Trim(),
                 StartDate = input.StartDate,
                 DueDate = input.DueDate,
+                Finished = false,
                 AddedByUserId = userId,
             };
 
@@ -81,6 +82,23 @@
                 .Where(x => x.Id == id)
                 .To<T>()
                 .FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Update Assignment.
+        /// </summary>
+        public async Task UpdateAsync(int id, EditAssignmentInputModel input)
+        {
+            var assignment = this.assignmentsRepository.All().FirstOrDefault(x => x.Id == id);
+            if (assignment != null)
+            {
+                assignment.Title = input.Title.Trim();
+                assignment.Description = input.Description.Trim();
+                assignment.StartDate = input.StartDate;
+                assignment.DueDate = input.DueDate;
+
+                await this.assignmentsRepository.SaveChangesAsync();
+            }
         }
 
         /// <summary>

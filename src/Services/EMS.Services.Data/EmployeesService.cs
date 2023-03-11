@@ -78,11 +78,11 @@
             var employee = this.employeesRepository.All().FirstOrDefault(x => x.Id == id);
             if (employee != null)
             {
-                employee.FirstName = input.FirstName;
-                employee.LastName = input.LastName;
-                employee.PhoneNumber = input.PhoneNumber;
+                employee.FirstName = input.FirstName.Trim();
+                employee.LastName = input.LastName.Trim();
+                employee.PhoneNumber = input.PhoneNumber.Trim();
                 employee.DateOfBirth = input.DateOfBirth;
-                employee.Email = input.Email;
+                employee.Email = input.Email.Trim();
                 employee.MonthlySalary = input.MonthlySalary;
 
                 await this.employeesRepository.SaveChangesAsync();

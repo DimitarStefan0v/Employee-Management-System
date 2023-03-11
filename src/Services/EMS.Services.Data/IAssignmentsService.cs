@@ -9,6 +9,8 @@
     {
         Task CreateAsync(CreateAssignmentInputModel input, string userId);
 
+        Task UpdateAsync(int id, EditAssignmentInputModel input);
+
         IEnumerable<T> GetAll<T>(string sort, int page, int itemsPerPage);
 
         T GetById<T>(int id);
