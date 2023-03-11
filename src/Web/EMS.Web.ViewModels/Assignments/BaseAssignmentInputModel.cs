@@ -15,7 +15,7 @@
 
         [Required(ErrorMessage = AssignmentInputErrorMessages.DescriptionRequired)]
         [MinLength(8, ErrorMessage = AssignmentInputErrorMessages.DescriptionMinLength)]
-        [MaxLength(500, ErrorMessage = AssignmentInputErrorMessages.DescriptionMaxLength)]
+        [MaxLength(2000, ErrorMessage = AssignmentInputErrorMessages.DescriptionMaxLength)]
         public string Description { get; set; }
 
         [Display(Name = AssignmentInputErrorMessages.DisplayStartDate)]
