@@ -15,6 +15,8 @@
 
         public DateTime DueDate { get; set; }
 
+        public DateTime? CompletedDate { get; set; }
+
         public bool Finished { get; set; }
 
         [ForeignKey(nameof(Employee))]
