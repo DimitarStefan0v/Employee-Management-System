@@ -20,5 +20,7 @@
         Task DeleteAsync(int id);
 
         bool CheckIfEmployeeExist(string firstName, string lastName);
+
+        IEnumerable<T> GetBestEmployees<T>(int countEmployees);
     }
 }

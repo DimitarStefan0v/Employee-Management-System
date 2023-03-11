@@ -139,6 +139,24 @@
         }
 
         /// <summary>
+        /// Get Top 5 Employees with the most completed Tasks.
+        /// </summary>
+        public IEnumerable<T> GetBestEmployees<T>(int countEmployees)
+        {
+            DateTime lastMonth = DateTime.Now.AddMonths(-1);
+            var employees = this.employeesRepository
+                .AllAsNoTracking()
+                .Where(x => x.Assignments.Any(a => a.Finished == true))
+                .Where(x => x.Assignments.All(a => a.CompletedDate.Value >= lastMonth))
+                .OrderByDescending(x => x.Assignments.Where(a => a.Finished == true).Count())
+                .Take(countEmployees)
+                .To<T>()
+                .ToList();
+
+            return employees;
+        }
+
+        /// <summary>
         /// Sort Employees.
         /// </summary>
         private static void SortEmployees(ref string sort, ref IQueryable<Employee> query)
