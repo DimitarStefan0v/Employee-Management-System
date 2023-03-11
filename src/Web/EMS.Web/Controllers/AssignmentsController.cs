@@ -7,19 +7,23 @@
     using EMS.Data.Models;
     using EMS.Services.Data;
     using EMS.Web.ViewModels.Assignments;
+    using EMS.Web.ViewModels.Employees;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     public class AssignmentsController : BaseController
     {
         private readonly IAssignmentsService assignmentsService;
+        private readonly ICountsService countsService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public AssignmentsController(
-            IAssignmentsService assignmentsService, 
+            IAssignmentsService assignmentsService,
+            ICountsService countsService,
             UserManager<ApplicationUser> userManager)
         {
             this.assignmentsService = assignmentsService;
+            this.countsService = countsService;
             this.userManager = userManager;
         }
 
@@ -64,9 +68,32 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
-        public IActionResult All()
+        public IActionResult All(string sortOrder = "startDate", int page = 1)
         {
-            return this.View();
+            if (page <= 0)
+            {
+                return this.NotFound();
+            }
+
+            var itemsPerPage = 6;
+
+            var viewModel = new AssignmentsListViewModel
+            {
+                ItemsPerPage = itemsPerPage,
+                PageNumber = page,
+                ItemsCount = this.countsService.GetAssignmentsCount(),
+                ControllerName = this.ControllerContext.ActionDescriptor.ControllerName,
+                ActionName = this.ControllerContext.ActionDescriptor.ActionName,
+                SortOrder = sortOrder,
+                Assignments = this.assignmentsService.GetAll<AssignmentInListViewModel>(sortOrder, page, itemsPerPage),
+            };
+
+            if (page > viewModel.PagesCount && viewModel.PagesCount > 0)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(viewModel);
         }
     }
 }

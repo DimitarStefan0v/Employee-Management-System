@@ -1,0 +1,46 @@
+﻿@using EMS.Web.ViewModels.Assignments;
+@model AssignmentsListViewModel
+
+@{
+    this.ViewData["Title"] = "All Tasks";
+}
+
+<h2 class="text-center">@this.ViewData["Title"]</h2>
+
+@if (Model.Assignments.Any())
+{
+    <section class="sort-wrapper">
+        <span>Sort By:</span>
+        <ul>
+            <li><a class="startDate-sort-link" asp-route-sortOrder="startDate" asp-route-id="1">Start Date</a></li>
+            <li><a class="dueDate-sort-link" asp-route-sortOrder="dueDate" asp-route-id="1">Due Date</a></li>
+            <li><a class="title-sort-link" asp-route-sortOrder="title" asp-route-id="1">Title</a></li>
+        </ul>
+    </section>
+    <input id="sort-order-value" type="hidden" value="@Model.SortOrder" />
+
+    <section class="assignments-wrapper mb-3">
+        @foreach (var assignment in Model.Assignments)
+        {
+            <article class="single-assignment-wrapper">
+                <ul>
+                    <li><p class="single-assignment-wrapper-title">Title: <strong>@assignment.Title</strong></p></li>
+                    <li><p class="single-assignment-wrapper-description">Description: <strong>@assignment.Description</strong></p></li>
+                    <li><p class="single-assignment-wrapper-startDate">Start Date: <strong>@assignment.StartDate.ToString("dddd, dd MMMM yyyy")</strong></p></li>
+                    <li><p class="single-assignment-wrapper-dueDate">Due Date: <strong>@assignment.DueDate.ToString("dddd, dd MMMM yyyy")</strong></p></li>
+                    <li><p class="single-assignment-wrapper-employeesCount">Assignee: <strong>@(assignment.AssignedEmployee == null ? "Not Assigned to anyone yet" : assignment.AssignedEmployee)</strong></p></li>
+                    <li class="assignment-btns"><a class="btn btn-success">Edit</a><a class="btn btn-danger">Delete</a></li>
+                </ul>
+            </article>
+        }
+    </section>
+
+    if (Model.PagesCount > 1)
+    {
+        <partial name="_PagingPartial" model="@Model" />
+    }
+}
+
+@section Scripts{
+    <script src="~/js/disableCurrentSortLinkForAssignments.js" asp-append-version="true"></script>
+}

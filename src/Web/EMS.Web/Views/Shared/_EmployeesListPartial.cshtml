@@ -13,7 +13,8 @@
                     <li><p class="single-employee-wrapper-phone">Phone Number: <strong>@employee.PhoneNumber</strong></p></li>
                     <li><p class="single-employee-wrapper-birthday">Birthday: <strong>@employee.DateOfBirth.ToString("dddd, dd MMMM yyyy")</strong></p></li>
                     <li><p class="single-employee-wrapper-salary">Monthly Salary: <strong>@(Math.Round(employee.MonthlySalary, 2)) euro</strong></p></li>
-                    <li><p class="single-employee-wrapper-finishedTasks">Completed Tasks: <strong>@employee.FinishedTasks</strong></p></li>
+                    <li><p class="single-employee-wrapper-finishedTasks">Pending Tasks: <strong>@employee.PendingAssignmentsCount</strong></p></li>
+                    <li><p class="single-employee-wrapper-finishedTasks">Completed Tasks: <strong>@employee.FinishedAssignmentsCount</strong></p></li>
                 </ul>
             </article>
         </a>

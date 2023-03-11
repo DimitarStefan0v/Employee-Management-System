@@ -5,7 +5,8 @@
     <ul>
         <li><a class="ascending-sort-link" asp-route-search="@Model.Search" asp-route-sortOrder="ascending" asp-route-id="1">Age<i class="fas fa-long-arrow-alt-up"></i></a></li>
         <li><a class="descending-sort-link" asp-route-search="@Model.Search" asp-route-sortOrder="descending" asp-route-id="1">Age<i class="fas fa-long-arrow-alt-down"></i></a></li>
-        <li><a class="completed-tasks-sort-link" asp-route-search="@Model.Search" asp-route-sortOrder="tasks" asp-route-id="1">Tasks</a></li>
+        <li><a class="completed-tasks-sort-link" asp-route-search="@Model.Search" asp-route-sortOrder="pending-tasks" asp-route-id="1">Pending Tasks</a></li>
+        <li><a class="completed-tasks-sort-link" asp-route-search="@Model.Search" asp-route-sortOrder="finished-tasks" asp-route-id="1">Finished Tasks</a></li>
         <li><a class="salary-sort-link" asp-route-search="@Model.Search" asp-route-sortOrder="salary" asp-route-id="1">Salary</a></li>
     </ul>
 </section>
