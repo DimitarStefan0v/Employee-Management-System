@@ -164,9 +164,15 @@
                         .ThenBy(x => x.FirstName)
                         .ThenBy(x => x.LastName);
                     break;
-                case "tasks":
+                case "pending-tasks":
                     query = query
-                        .OrderByDescending(x => x.Assignments.Select(a => a.Finished).Count())
+                        .OrderByDescending(x => x.Assignments.Where(a => a.Finished == false).Count())
+                        .ThenBy(x => x.FirstName)
+                        .ThenBy(x => x.LastName);
+                    break;
+                case "finished-tasks":
+                    query = query
+                        .OrderByDescending(x => x.Assignments.Where(a => a.Finished == true).Count())
                         .ThenBy(x => x.FirstName)
                         .ThenBy(x => x.LastName);
                     break;

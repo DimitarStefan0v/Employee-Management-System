@@ -1,11 +1,13 @@
 ﻿namespace EMS.Services.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using EMS.Data.Common.Repositories;
     using EMS.Data.Models;
+    using EMS.Services.Mapping;
     using EMS.Web.ViewModels.Assignments;
 
     public class AssignmentsService : IAssignmentsService
@@ -37,7 +39,7 @@
         }
 
         /// <summary>
-        /// Check If Assignment with the same Title exists.
+        /// Check If Assignment with the same Title exists and it's not finished.
         /// </summary>
         public bool CheckIfAssignmentExist(string title)
         {
@@ -48,7 +50,63 @@
 
             return this.assignmentsRepository
                 .AllAsNoTracking()
-                .Any(x => x.Title.ToLower() == title.ToLower().Trim());
+                .Any(x => x.Title.ToLower() == title.ToLower().Trim() && x.Finished == false);
+        }
+
+        /// <summary>
+        /// Get All Assignments.
+        /// </summary>
+        public IEnumerable<T> GetAll<T>(string sort, int page, int itemsPerPage)
+        {
+            var query = this.assignmentsRepository
+                            .AllAsNoTracking()
+                            .AsQueryable();
+
+            SortEmployees(ref sort, ref query);
+
+            return query
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .To<T>()
+                .ToList();
+        }
+
+        /// <summary>
+        /// Sort Assignments.
+        /// </summary>
+        private static void SortEmployees(ref string sort, ref IQueryable<Assignment> query)
+        {
+            if (sort == null)
+            {
+                sort = "startDate";
+            }
+
+            sort = sort.ToLower().Trim();
+
+            switch (sort)
+            {
+                case "startdate":
+                    query = query
+                        .OrderBy(x => x.StartDate)
+                        .ThenBy(x => x.Title);
+                    break;
+                case "duedate":
+                    query = query
+                        .OrderBy(x => x.DueDate)
+                        .ThenBy(x => x.Title);
+                    break;
+                case "title":
+                    query = query
+                        .OrderByDescending(x => x.Title)
+                        .ThenBy(x => x.DueDate);
+                    break;
+                default:
+                    sort = "startdate";
+                    query = query
+                        .OrderBy(x => x.StartDate)
+                        .ThenBy(x => x.Title);
+                    break;
+            }
         }
     }
 }
