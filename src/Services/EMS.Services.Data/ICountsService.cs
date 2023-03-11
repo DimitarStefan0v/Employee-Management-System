@@ -5,5 +5,7 @@
         int GetEmployeesCount();
 
         int GetEmployeesCountByName(string name);
+
+        int GetAssignmentsCount();
     }
 }

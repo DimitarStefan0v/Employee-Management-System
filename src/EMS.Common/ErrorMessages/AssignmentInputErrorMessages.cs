@@ -17,7 +17,7 @@
 
         public const string TitleMaxLength = "The Title can't be more than 50 characters long";
 
-        public const string AssignmentExists = "There is already a Task with the same name";
+        public const string AssignmentExists = "There is already a pending Task with the same name";
 
         /// <summary>
         /// Description Messages.

@@ -12,10 +12,21 @@
     public class CountsService : ICountsService
     {
         private readonly IDeletableEntityRepository<Employee> employeesRepository;
+        private readonly IDeletableEntityRepository<Assignment> assignmentsRepository;
 
-        public CountsService(IDeletableEntityRepository<Employee> employeesRepository)
+        public CountsService(
+            IDeletableEntityRepository<Employee> employeesRepository,
+            IDeletableEntityRepository<Assignment> assignmentsRepository)
         {
             this.employeesRepository = employeesRepository;
+            this.assignmentsRepository = assignmentsRepository;
+        }
+
+        public int GetAssignmentsCount()
+        {
+            return this.assignmentsRepository
+                .AllAsNoTracking()
+                .Count();
         }
 
         public int GetEmployeesCount()
