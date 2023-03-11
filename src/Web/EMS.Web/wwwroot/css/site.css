@@ -187,7 +187,7 @@ footer {
 
 footer a {
     text-decoration: none;
-    color: inherit;
+    color: white;
 }
 
 footer a:hover {
@@ -253,6 +253,10 @@ footer a:hover {
     justify-content: space-between;
 }
 
+.assignment-form {
+    display: flex;
+    gap: 3px;
+}
 
 
 

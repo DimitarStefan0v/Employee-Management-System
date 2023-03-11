@@ -9,8 +9,18 @@
 
 @if (Model.Employees.Any())
 {
-    <partial name="_SortingPartial" />
+    if (Model.ItemsCount > 1)
+    {
+        <partial name="_SortingPartial" />
+    }
+
+    if (Model.PagesCount > 1)
+    {
+        <partial name="_PagingPartial" model="@Model" />
+    }
+
     <partial name="_EmployeesListPartial" model="@Model" />
+
     if (Model.PagesCount > 1)
     {
         <partial name="_PagingPartial" model="@Model" />

@@ -16,7 +16,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,10 +34,15 @@
                             <a class="nav-link active" asp-area="" asp-controller="Assignments" asp-action="All">All Tasks</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link active" asp-area="" asp-controller="Assignments" asp-action="AllPending">Pending Tasks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" asp-area="" asp-controller="Assignments" asp-action="AllCompleted">Completed Tasks</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link active" asp-area="" asp-controller="Assignments" asp-action="Create">Add Task</a>
                         </li>
                     </ul>
-                    
                     <form asp-area="" asp-controller="Employees" asp-action="ByName" class="d-flex">
                         <input class="form-control me-2" name="search" type="search" placeholder="Search by Name" aria-label="Search" required>
                         <button class="btn btn-outline-success" type="submit">Search</button>
@@ -54,7 +59,7 @@
         </main>
     </div>
     
-    <footer>
+    <footer class="navbar-dark bg-dark">
         <a href="https://github.com/DimitarStefan0v/Employee-Management-System" title="Open Source System"><span>&copy; @(DateTime.Now.Year + " - " + GlobalConstants.SystemName) - Open Source System</span></a>
     </footer>
 

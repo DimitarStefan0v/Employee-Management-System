@@ -6,7 +6,7 @@
 }
 
 <h2 class="text-center">@this.ViewData["Title"]</h2>
-<form method="post" class="col-md-10 col-lg-4 mx-auto" enctype="application/x-www-form-urlencoded">
+<form method="post" class="col-md-10 col-lg-8 mx-auto" enctype="application/x-www-form-urlencoded">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="mb-3">
         <label asp-for="Title" class="form-label"></label>
@@ -15,7 +15,7 @@
     </div>
     <div class="mb-3">
         <label asp-for="Description" class="form-label"></label>
-        <textarea asp-for="Description" rows="7" class="form-control"></textarea>
+        <textarea asp-for="Description" rows="12" class="form-control"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
     <div class="mb-3">

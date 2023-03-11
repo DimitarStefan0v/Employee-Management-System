@@ -12,11 +12,18 @@
 else if (Model.Employees.Any())
 {
     <h2 class="text-center">@this.ViewData["Title"]</h2>
-    if (Model.Employees.Count() > 1)
+    if (Model.ItemsCount > 1)
     {
         <partial name="_SortingPartial" model="@Model" />
     }
+
+    if (Model.PagesCount > 1)
+    {
+        <partial name="_PagingPartial" model="@Model" />
+    }
+
     <partial name="_EmployeesListPartial" model="@Model" />
+
     if (Model.PagesCount > 1)
     {
         <partial name="_PagingPartial" model="@Model" />

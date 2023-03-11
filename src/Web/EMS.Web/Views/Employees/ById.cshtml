@@ -3,6 +3,7 @@
 
 @{
     this.ViewData["Title"] = $"Employee: {Model.FirstName} {Model.LastName}";
+    var assignmentsElements = this.Model.Assignments.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Title });
 }
 
 <section class="byId-wrapper">
@@ -18,6 +19,14 @@
             <article class="employee-byId-wrapper-salary">Monthly Salary: <strong>@Model.MonthlySalary euro</strong></article>
         </article>
     </section>
+    <div class="mb-3">
+        <form method="post" asp-action="AssignTask" asp-route-employeeId="@Model.Id" class="assignment-form" enctype="application/x-www-form-urlencoded">
+            <select asp-for="AssignmentId" asp-items="assignmentsElements" class="form-select" aria-label="Default select example">
+                <option value="0">Add new task</option>
+            </select>
+            <input type="submit" value="Assign" class="btn btn-primary" />
+        </form>
+    </div>
     <ul class="employee-btns">
         <li><a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Edit</a></li>
         <li>
