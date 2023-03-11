@@ -72,6 +72,18 @@
         }
 
         /// <summary>
+        /// Get Assignment by Id.
+        /// </summary>
+        public T GetById<T>(int id)
+        {
+            return this.assignmentsRepository
+                .AllAsNoTracking()
+                .Where(x => x.Id == id)
+                .To<T>()
+                .FirstOrDefault();
+        }
+
+        /// <summary>
         /// Sort Assignments.
         /// </summary>
         private static void SortEmployees(ref string sort, ref IQueryable<Assignment> query)
