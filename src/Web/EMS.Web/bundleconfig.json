@@ -16,6 +16,13 @@
     ]
   },
   {
+    "outputFileName": "wwwroot/js/disableCurrentSortLinkForAssignments.min.js",
+    // An array of relative input file paths. Globbing patterns supported
+    "inputFiles": [
+      "wwwroot/js/disableCurrentSortLinkForAssignments.js"
+    ]
+  },
+  {
     "outputFileName": "wwwroot/js/site.min.js",
     "inputFiles": [
       "wwwroot/js/site.js"

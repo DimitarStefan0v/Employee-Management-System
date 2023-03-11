@@ -9,16 +9,18 @@
 
 @if (Model.Assignments.Any())
 {
-    <section class="sort-wrapper">
-        <span>Sort By:</span>
-        <ul>
-            <li><a class="startDate-sort-link" asp-route-sortOrder="startDate" asp-route-id="1">Start Date</a></li>
-            <li><a class="dueDate-sort-link" asp-route-sortOrder="dueDate" asp-route-id="1">Due Date</a></li>
-            <li><a class="title-sort-link" asp-route-sortOrder="title" asp-route-id="1">Title</a></li>
-        </ul>
-    </section>
-    <input id="sort-order-value" type="hidden" value="@Model.SortOrder" />
-
+    if (Model.Assignments.Count() > 1)
+    {
+        <section class="sort-wrapper">
+            <span>Sort By:</span>
+            <ul>
+                <li><a class="startDate-sort-link" asp-route-sortOrder="startDate" asp-route-id="1">Start Date</a></li>
+                <li><a class="dueDate-sort-link" asp-route-sortOrder="dueDate" asp-route-id="1">Due Date</a></li>
+                <li><a class="title-sort-link" asp-route-sortOrder="title" asp-route-id="1">Title</a></li>
+            </ul>
+        </section>
+        <input id="sort-order-value" type="hidden" value="@Model.SortOrder" />
+    }
     <section class="assignments-wrapper mb-3">
         @foreach (var assignment in Model.Assignments)
         {
@@ -42,5 +44,5 @@
 }
 
 @section Scripts{
-    <script src="~/js/disableCurrentSortLinkForAssignments.js" asp-append-version="true"></script>
+    <script src="~/js/disableCurrentSortLinkForAssignments.min.js" asp-append-version="true"></script>
 }
