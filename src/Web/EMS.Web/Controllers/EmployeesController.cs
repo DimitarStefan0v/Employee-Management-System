@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
 
+    using EMS.Common.ErrorMessages;
     using EMS.Data.Models;
     using EMS.Services.Data;
     using EMS.Web.ViewModels.Employees;
@@ -41,7 +42,7 @@
 
             if (this.employeesService.CheckIfEmployeeExist(input.FirstName, input.LastName))
             {
-                this.ModelState.AddModelError(string.Empty, "There is already a employee with the same first and last name");
+                this.ModelState.AddModelError(string.Empty, EmployeeInputErrorMessages.DuplicateNames);
                 return this.View(input);
             }
 

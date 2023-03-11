@@ -10,12 +10,12 @@
     {
         [Required(ErrorMessage = AssignmentInputErrorMessages.TitleRequired)]
         [MinLength(4, ErrorMessage = AssignmentInputErrorMessages.TitleMinLength)]
-        [MaxLength(20, ErrorMessage = AssignmentInputErrorMessages.TitleMaxLength)]
+        [MaxLength(50, ErrorMessage = AssignmentInputErrorMessages.TitleMaxLength)]
         public string Title { get; set; }
 
         [Required(ErrorMessage = AssignmentInputErrorMessages.DescriptionRequired)]
         [MinLength(8, ErrorMessage = AssignmentInputErrorMessages.DescriptionMinLength)]
-        [MaxLength(300, ErrorMessage = AssignmentInputErrorMessages.DescriptionMaxLength)]
+        [MaxLength(500, ErrorMessage = AssignmentInputErrorMessages.DescriptionMaxLength)]
         public string Description { get; set; }
 
         [Display(Name = AssignmentInputErrorMessages.DisplayStartDate)]

@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+
     using EMS.Data.Common.Repositories;
     using EMS.Data.Models;
     using EMS.Web.ViewModels.Assignments;
@@ -11,7 +12,8 @@
     {
         private readonly IDeletableEntityRepository<Assignment> assignmentsRepository;
 
-        public AssignmentsService(IDeletableEntityRepository<Assignment> assignmentsRepository)
+        public AssignmentsService(
+            IDeletableEntityRepository<Assignment> assignmentsRepository)
         {
             this.assignmentsRepository = assignmentsRepository;
         }

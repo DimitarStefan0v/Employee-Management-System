@@ -15,9 +15,9 @@
 
         public const string TitleMinLength = "The Title must be at least 4 characters long";
 
-        public const string TitleMaxLength = "The Title can't be more than 20 characters long";
+        public const string TitleMaxLength = "The Title can't be more than 50 characters long";
 
-        public const string AssignmentExists = "There is already a pending Task with the same name";
+        public const string AssignmentExists = "There is already a Task with the same name";
 
         /// <summary>
         /// Description Messages.
@@ -26,7 +26,7 @@
 
         public const string DescriptionMinLength = "The Description must be at least 8 characters long";
 
-        public const string DescriptionMaxLength = "The Description can't be more than 300 characters long";
+        public const string DescriptionMaxLength = "The Description can't be more than 500 characters long";
 
         /// <summary>
         /// StartDate Messages.
@@ -41,5 +41,7 @@
         public const string DisplayDueDate = "Due Date";
 
         public const string DueDateRequired = "The Due Date is required";
+
+        public const string DueDateCanNotBeBeforeStartDate = "The Due Date can't be before the Start Date";
     }
 }
