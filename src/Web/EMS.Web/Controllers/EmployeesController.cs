@@ -98,9 +98,6 @@
         {
             var viewModel = this.employeesService.GetById<SingleEmployeeViewModel>(id);
             viewModel.Assignments = (ICollection<AssignmentsViewModel>)this.assignmentsService.GetAllPendingAssignmentsForDropDown<AssignmentsViewModel>();
-            viewModel.PendingAssignments = (ICollection<AssignmentsViewModel>)this.assignmentsService.GetAllPendingAssignmentsByUserId(id);
-            viewModel.FinishedAssignments = (ICollection<AssignmentsViewModel>)this.assignmentsService.GetAllFinishedAssignmentsByUserId(id);
-
             return this.View(viewModel);
         }
 
@@ -175,6 +172,14 @@
         public async Task<IActionResult> AssignTask(int assignmentId, int employeeId)
         {
             await this.assignmentsService.AssignToEmployee(employeeId, assignmentId);
+            var id = employeeId;
+            return this.RedirectToAction(nameof(this.ById), new { id });
+        }
+
+        public async Task<IActionResult> CompleteTask(int employeeId, int assignmentId)
+        {
+            await this.assignmentsService.CompleteAssignment(assignmentId);
+
             var id = employeeId;
             return this.RedirectToAction(nameof(this.ById), new { id });
         }

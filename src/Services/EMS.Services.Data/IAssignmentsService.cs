@@ -19,10 +19,14 @@
 
         IEnumerable<T> GetAllCompleted<T>(string sort, int page, int itemsPerPage);
 
+        IEnumerable<T> GetAllPendingAssignmentsForDropDown<T>();
+
         T GetById<T>(int id);
 
         bool CheckIfAssignmentExist(string title);
 
         Task AssignToEmployee(int employeeId, int assignmentId);
+
+        Task CompleteAssignment(int id);
     }
 }

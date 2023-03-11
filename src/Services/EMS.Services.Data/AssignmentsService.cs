@@ -1,5 +1,6 @@
 ﻿namespace EMS.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -172,6 +173,37 @@
                 employee.Assignments.Add(assignment);
                 await this.employeesRepository.SaveChangesAsync();
             }
+        }
+
+        /// <summary>
+        /// Complete Assignment.
+        /// </summary>
+        public async Task CompleteAssignment(int id)
+        {
+            var assignment = this.assignmentsRepository
+                .All()
+                .FirstOrDefault(x => x.Id == id);
+
+            if (assignment != null && assignment.Finished == false)
+            {
+                assignment.Finished = true;
+                assignment.CompletedDate = DateTime.UtcNow;
+                await this.assignmentsRepository.SaveChangesAsync();
+            }
+        }
+
+        /// <summary>
+        /// Get All Pending Assignments for Dropdown model.
+        /// </summary>
+        public IEnumerable<T> GetAllPendingAssignmentsForDropDown<T>()
+        {
+            return this.assignmentsRepository
+                .AllAsNoTracking()
+                .Where(x => x.Finished == false)
+                .Where(x => x.EmployeeId == null)
+                .OrderBy(x => x.Title)
+                .To<T>()
+                .ToList();
         }
 
         /// <summary>
