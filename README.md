@@ -1,16 +1,16 @@
-# Employee-Management-System
+# Employee Management System
 
 
 # Link
-?????????????
+https://emsystem.bsite.net/
 
 
 
 
 ## :pencil: Project Description 
 **_Users_** are able to view all employees, search employee by name, sort employees by age, salary, pending and finished tasks or view all tasks, sort tasks by start date, due date or title.
-**_Users_** can freely cread, update or delete employees and tasks.
-**_Users_** can assign a Task to Employee in page Empolyee/ById or finish pending task of employee from the same page.
+**_Users_** can freely create, update or delete employees and tasks.
+**_Users_** can assign a Task to Employee in page Empolyee/ById or finish a pending task of employee from the same page.
 
 
 # :hammer: Built With:
