@@ -1,11 +1,6 @@
 # Employee Management System
 
 
-# Link
-https://emsystem.bsite.net/
-
-
-
 
 ## :pencil: Project Description 
 **_Users_** are able to view all employees, search employee by name, sort employees by age, salary, pending and finished tasks or view all tasks, sort tasks by start date, due date or title.
