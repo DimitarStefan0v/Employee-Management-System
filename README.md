@@ -3,9 +3,8 @@
 
 
 ## :pencil: Project Description 
-**_Users_** are able to view all employees, search employee by name, sort employees by age, salary, pending and finished tasks or view all tasks, sort tasks by start date, due date or title.
-**_Users_** can freely create, update or delete employees and tasks.
-**_Users_** can assign a Task to Employee in page Empolyee/ById or finish a pending task of employee from the same page.
+An application built with ASP.NET Core, MS SQL Server, and Entity Framework Core, allowing users to freely perform CRUD operations on Employees and Tasks. Additionally, users have the capability to assign tasks to employees and mark tasks as completed for a given employee.
+
 
 
 # :hammer: Built With:
